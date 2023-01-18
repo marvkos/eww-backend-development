@@ -1,11 +1,19 @@
 package at.technikum.fhoverflow.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import org.hibernate.validator.constraints.Length;
+
 public class Question {
 
+    @Positive
     private Long id;
 
+    @NotBlank
+    @Length(max = 255)
     private String title;
 
+    @NotBlank
     private String description;
 
     public Question() {

@@ -1,6 +1,7 @@
 package at.technikum.fhoverflow.controller;
 
 import at.technikum.fhoverflow.model.Question;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,8 +23,9 @@ public class QuestionController {
     }
 
     @PostMapping()
-    public Question create() {
-        return null;
+    public Question create(@RequestBody @Valid Question question) {
+        this.questions.add(question);
+        return question;
     }
 
     @GetMapping()
