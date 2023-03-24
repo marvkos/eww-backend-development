@@ -13,13 +13,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // Disable CORS and CSRF
         http.cors().and().csrf().disable();
 
+        // Set sessions to stateless
         http
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and();
 
+        // Send 401 if user fails to authorize
         http
                 .exceptionHandling()
                 .authenticationEntryPoint(
