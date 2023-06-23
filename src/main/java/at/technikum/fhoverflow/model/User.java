@@ -1,18 +1,18 @@
 package at.technikum.fhoverflow.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class User implements UserDetails {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,42 +20,36 @@ public class User implements UserDetails {
 
     private String username;
 
+    @JsonIgnore
     private String password;
 
     private String role;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
     public String getUsername() {
         return username;
     }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
+    public String getPassword() {
+        return password;
     }
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    @Override
-    public boolean isEnabled() {
-        return true;
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

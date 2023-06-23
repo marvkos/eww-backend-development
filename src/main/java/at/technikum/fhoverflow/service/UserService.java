@@ -2,7 +2,11 @@ package at.technikum.fhoverflow.service;
 
 import at.technikum.fhoverflow.model.User;
 import at.technikum.fhoverflow.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Service
 public class UserService {
 
     private final UserRepository userRepository;
@@ -11,7 +15,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         return userRepository
                 .findByUsername(username);
     }
